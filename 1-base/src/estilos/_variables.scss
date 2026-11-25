@@ -1,0 +1,22 @@
+// paleta y medidas que comparte toda la app
+$naranja: #e4572e;
+$naranja-oscuro: #c2401b;
+$tinta: #22223b;
+$gris: #6b6b7b;
+$fondo: #faf7f2;
+$borde: #e6e1d8;
+$verde: #2a9d8f;
+$espacio: 8px;
+$radio: 10px;
+
+@mixin fila($separacion: $espacio) {
+  display: flex;
+  align-items: center;
+  gap: $separacion;
+}
+
+@mixin tarjeta {
+  background: white;
+  border: 1px solid $borde;
+  border-radius: $radio;
+}

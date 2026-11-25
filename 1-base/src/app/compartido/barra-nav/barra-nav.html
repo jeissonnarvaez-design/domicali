@@ -1,0 +1,22 @@
+<header class="barra">
+  <a class="logo" routerLink="/inicio">Domi<span>Cali</span></a>
+
+  <nav class="menu">
+    <!-- menu publico: lo ve cualquiera -->
+    <a routerLink="/inicio" routerLinkActive="activo">Inicio</a>
+
+    <!-- menu privado: solo con sesion iniciada -->
+    @if (auth.session()) {
+    }
+  </nav>
+
+  <div class="cuenta">
+    @if (auth.session()) {
+      <span class="correo">{{ auth.correo() }}</span>
+      <button type="button" class="boton-borde" (click)="salir()">Salir</button>
+    } @else {
+      <a routerLink="/login">Entrar</a>
+      <a class="boton" routerLink="/registro">Crear cuenta</a>
+    }
+  </div>
+</header>
