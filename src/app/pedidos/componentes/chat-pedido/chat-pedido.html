@@ -1,0 +1,21 @@
+<div class="chat">
+  <h3>Chat del pedido</h3>
+
+  <div class="mensajes">
+    @for (mensaje of mensajes(); track mensaje.id) {
+      <div class="burbuja" [class.mia]="esMio(mensaje)">
+        @if (!esMio(mensaje)) {
+          <span class="autor">{{ mensaje.autor }}</span>
+        }
+        {{ mensaje.texto }}
+      </div>
+    } @empty {
+      <p class="nota">Todavia no hay mensajes. Escribele al repartidor si necesitas algo.</p>
+    }
+  </div>
+
+  <form class="escribir" (ngSubmit)="enviar()">
+    <input type="text" name="texto" [(ngModel)]="texto" placeholder="Escribe un mensaje" />
+    <button type="submit" class="boton">Enviar</button>
+  </form>
+</div>

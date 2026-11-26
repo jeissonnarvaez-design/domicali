@@ -32,6 +32,16 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () => import('./cuenta/perfil/perfil').then((m) => m.Perfil),
   },
+  {
+    path: 'pedidos',
+    canActivate: [authGuard],
+    loadChildren: () => import('./pedidos/pedidos.routes').then((m) => m.PEDIDOS_ROUTES),
+  },
+  {
+    path: 'cocina',
+    canActivate: [authGuard],
+    loadComponent: () => import('./pedidos/cocina/cocina').then((m) => m.Cocina),
+  },
 
   // siempre de ultima
   { path: '**', component: NoEncontrado },

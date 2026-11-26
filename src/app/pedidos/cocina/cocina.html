@@ -1,0 +1,42 @@
+<h2>Cocina</h2>
+<p class="nota">Los pedidos se atienden en el orden en que llegan.</p>
+
+<div class="cocina">
+  <div class="caja">
+    <h3>En cola ({{ enCola().length }})</h3>
+
+    <ol class="cola">
+      @for (pedido of enCola(); track pedido.id; let primero = $first) {
+        <li [class.primero]="primero">
+          <div>
+            <strong>#{{ pedido.id }} - {{ pedido.restaurante }}</strong>
+            <span class="detalle">{{ pedido.correo }} · {{ pedido.zona_entrega }} · {{ hora(pedido.created_at) }}</span>
+          </div>
+          <span>$ {{ pedido.total }}</span>
+        </li>
+      } @empty {
+        <p class="nota">No hay pedidos pendientes.</p>
+      }
+    </ol>
+  </div>
+
+  <div class="caja despacho">
+    @if (siguiente(); as s) {
+      <h3>Siguiente: #{{ s.id }}</h3>
+      <ul class="resumen-items">
+        @for (item of s.items; track item.plato_id) {
+          <li>
+            <span>{{ item.cantidad }} x {{ item.nombre }}</span>
+          </li>
+        }
+      </ul>
+      <button type="button" class="boton" (click)="despacharSiguiente()">Despachar</button>
+    } @else {
+      <h3>Nada por despachar</h3>
+    }
+
+    @if (despachado(); as d) {
+      <p class="nota">El pedido #{{ d.id }} salio hacia {{ d.zona_entrega }}.</p>
+    }
+  </div>
+</div>

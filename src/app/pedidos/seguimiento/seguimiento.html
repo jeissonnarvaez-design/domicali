@@ -1,0 +1,48 @@
+<a class="volver" routerLink="/pedidos">← Mis pedidos</a>
+
+@if (pedido(); as p) {
+  <h2>Pedido #{{ p.id }} - {{ p.restaurante }}</h2>
+
+  <div class="pasos-pedido">
+    @for (paso of pasos; track paso) {
+      <div class="paso-pedido" [class.hecho]="completo(paso)">
+        <span class="punto"></span>
+        {{ textoEstado[paso] }}
+      </div>
+    }
+  </div>
+
+  <div class="seguimiento">
+    <div class="caja">
+      <h3>Ruta de entrega</h3>
+      <app-mapa-zonas [ruta]="ruta()" />
+      <p class="nota">Entrega en {{ p.direccion }}, {{ p.zona_entrega }}</p>
+
+      @if (p.estado === 'en_camino') {
+        <button type="button" class="boton" (click)="recibido()">Ya lo recibi</button>
+      }
+    </div>
+
+    <div>
+      <div class="caja">
+        <h3>Detalle</h3>
+        <ul class="resumen-items">
+          @for (item of p.items; track item.plato_id) {
+            <li>
+              <span>{{ item.cantidad }} x {{ item.nombre }}</span>
+              <span>$ {{ item.precio * item.cantidad }}</span>
+            </li>
+          }
+        </ul>
+        <div class="total">
+          <span>Total</span>
+          <strong>$ {{ p.total }}</strong>
+        </div>
+      </div>
+
+      <app-chat-pedido [pedidoId]="p.id" />
+    </div>
+  </div>
+} @else {
+  <p class="nota">Cargando...</p>
+}

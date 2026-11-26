@@ -1,0 +1,339 @@
+@use 'variables' as *;
+
+.caja {
+  @include tarjeta;
+  padding: $espacio * 2.5;
+  margin-bottom: $espacio * 2;
+
+  h3 {
+    font-size: 16px;
+  }
+}
+
+.resumen-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 $espacio * 1.5;
+
+  li {
+    @include fila();
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 6px 0;
+    border-bottom: 1px dashed $borde;
+  }
+}
+
+.total {
+  @include fila();
+  justify-content: space-between;
+  font-size: 18px;
+}
+
+/* confirmar */
+.confirmar,
+.seguimiento {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $espacio * 2;
+  align-items: start;
+}
+
+.datos-entrega {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 13px;
+    color: $gris;
+    margin-bottom: 4px;
+  }
+
+  select,
+  input {
+    padding: $espacio * 1.25;
+    border: 1px solid $borde;
+    border-radius: $radio;
+    margin-bottom: $espacio * 2;
+    font-size: 14px;
+    background: white;
+  }
+}
+
+/* mapa de zonas */
+.mapa {
+  width: 100%;
+  max-height: 420px;
+
+  line {
+    stroke: $borde;
+    stroke-width: 4;
+
+    &.ruta {
+      stroke: $naranja;
+      stroke-width: 7;
+    }
+  }
+
+  circle {
+    fill: white;
+    stroke: $gris;
+    stroke-width: 3;
+  }
+
+  text {
+    font-size: 14px;
+    fill: $tinta;
+    text-anchor: middle;
+    // borde blanco para que la linea de la ruta no tape el nombre
+    paint-order: stroke;
+    stroke: white;
+    stroke-width: 4px;
+  }
+
+  .paso circle {
+    stroke: $naranja;
+  }
+
+  .origen circle {
+    fill: $verde;
+    stroke: $verde;
+  }
+
+  .destino circle {
+    fill: $naranja;
+    stroke: $naranja;
+  }
+
+  .origen text,
+  .destino text {
+    font-weight: 700;
+  }
+}
+
+.recorrido {
+  font-size: 14px;
+  font-weight: 600;
+
+  span {
+    color: $gris;
+    font-weight: 400;
+  }
+}
+
+/* mis pedidos */
+.lista-pedidos {
+  display: flex;
+  flex-direction: column;
+  gap: $espacio * 1.5;
+}
+
+.tarjeta-pedido {
+  @include tarjeta;
+  @include fila($espacio * 2);
+  justify-content: space-between;
+  padding: $espacio * 2;
+  color: $tinta;
+  text-decoration: none;
+
+  &:hover {
+    border-color: $naranja;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.detalle {
+  font-size: 13px;
+  color: $gris;
+}
+
+.estado {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+
+  &.pendiente {
+    background: #fff3d6;
+    color: #9a6b00;
+  }
+
+  &.en_camino {
+    background: #fff3ee;
+    color: $naranja-oscuro;
+  }
+
+  &.entregado {
+    background: #e3f4f2;
+    color: $verde;
+  }
+}
+
+/* seguimiento */
+.pasos-pedido {
+  @include fila($espacio * 4);
+  margin-bottom: $espacio * 3;
+
+  .paso-pedido {
+    @include fila();
+    color: $gris;
+    font-size: 14px;
+
+    &.hecho {
+      color: $tinta;
+      font-weight: 600;
+
+      .punto {
+        background: $verde;
+        border-color: $verde;
+      }
+    }
+  }
+
+  .punto {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid $borde;
+  }
+}
+
+/* chat */
+.chat {
+  @include tarjeta;
+  padding: $espacio * 2.5;
+
+  .mensajes {
+    display: flex;
+    flex-direction: column;
+    gap: $espacio;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: $espacio * 2;
+  }
+
+  .burbuja {
+    align-self: flex-start;
+    background: $fondo;
+    border-radius: $radio;
+    padding: $espacio $espacio * 1.5;
+    font-size: 14px;
+    max-width: 80%;
+
+    &.mia {
+      align-self: flex-end;
+      background: $naranja;
+      color: white;
+    }
+
+    .autor {
+      display: block;
+      font-size: 11px;
+      color: $gris;
+    }
+  }
+
+  .escribir {
+    @include fila();
+
+    input {
+      flex: 1;
+      padding: $espacio * 1.25;
+      border: 1px solid $borde;
+      border-radius: $radio;
+      font-size: 14px;
+    }
+  }
+}
+
+/* cocina */
+.cocina {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: $espacio * 2;
+  align-items: start;
+}
+
+.cola {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    @include fila($espacio * 2);
+    justify-content: space-between;
+    padding: $espacio * 1.5;
+    border-bottom: 1px solid $borde;
+
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &.primero {
+      background: #fff3ee;
+      border-left: 4px solid $naranja;
+    }
+  }
+}
+
+/* lo mas pedido en el inicio */
+.mas-pedidos {
+  @include tarjeta;
+  padding: $espacio * 3;
+
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    @include fila($espacio * 2);
+    padding: $espacio 0;
+    border-bottom: 1px solid $borde;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .puesto {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: $tinta;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .plato {
+    flex: 1;
+  }
+
+  .veces {
+    color: $gris;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 800px) {
+  .confirmar,
+  .seguimiento,
+  .cocina {
+    grid-template-columns: 1fr;
+  }
+
+  .pasos-pedido {
+    flex-wrap: wrap;
+    gap: $espacio * 2;
+  }
+}
