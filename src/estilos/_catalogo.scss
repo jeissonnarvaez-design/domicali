@@ -1,0 +1,308 @@
+@use 'variables' as *;
+
+.barra .menu .contador {
+  background: $naranja;
+  color: white;
+  border-radius: 10px;
+  font-size: 11px;
+  padding: 1px 7px;
+  margin-left: 4px;
+}
+
+/* listado con el arbol a la izquierda */
+.catalogo {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: $espacio * 3;
+  align-items: start;
+}
+
+.panel-categorias {
+  @include tarjeta;
+  padding: $espacio * 2 0;
+  position: sticky;
+  top: 90px;
+
+  h3 {
+    font-size: 15px;
+    padding: 0 $espacio * 2;
+  }
+
+  .categoria {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-left: 3px solid transparent;
+    padding-top: $espacio;
+    padding-bottom: $espacio;
+    font-size: 14px;
+    color: $tinta;
+    cursor: pointer;
+
+    span {
+      margin-right: 6px;
+    }
+
+    &:hover {
+      background: $fondo;
+    }
+
+    &.activa {
+      border-left-color: $naranja;
+      color: $naranja;
+      font-weight: 600;
+      background: #fff3ee;
+    }
+  }
+}
+
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: $espacio * 2;
+}
+
+.tarjeta-restaurante {
+  @include tarjeta;
+  @include fila($espacio * 2);
+  padding: $espacio * 2;
+  text-decoration: none;
+  color: $tinta;
+
+  &:hover {
+    border-color: $naranja;
+  }
+
+  h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 13px;
+    color: $gris;
+    margin: 0 0 6px;
+  }
+}
+
+.icono {
+  font-size: 34px;
+  background: $fondo;
+  border-radius: $radio;
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zona {
+  font-size: 12px;
+  color: $verde;
+  font-weight: 600;
+}
+
+/* detalle del restaurante */
+.volver {
+  display: inline-block;
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: $espacio * 2;
+}
+
+.cabecera-restaurante {
+  @include fila($espacio * 3);
+  margin-bottom: $espacio * 3;
+
+  .icono {
+    width: 96px;
+    height: 96px;
+    font-size: 52px;
+  }
+
+  h1 {
+    margin-bottom: 4px;
+  }
+
+  p {
+    color: $gris;
+    margin: 0 0 6px;
+  }
+}
+
+.aviso {
+  background: #fff3ee;
+  border: 1px solid #f6c7b6;
+  border-radius: $radio;
+  padding: $espacio * 1.5 $espacio * 2;
+  font-size: 14px;
+
+  a {
+    margin-left: $espacio;
+    font-weight: 600;
+  }
+}
+
+.lista-platos {
+  display: flex;
+  flex-direction: column;
+  gap: $espacio * 1.5;
+}
+
+.tarjeta-plato {
+  @include tarjeta;
+  @include fila($espacio * 2);
+  justify-content: space-between;
+  padding: $espacio * 2;
+
+  h4 {
+    margin: 0 0 4px;
+    font-size: 16px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: $gris;
+  }
+
+  .lugar {
+    font-size: 12px;
+    color: $verde;
+    font-weight: 600;
+  }
+
+  .derecha {
+    @include fila($espacio * 2);
+    white-space: nowrap;
+  }
+}
+
+/* buscador */
+.campo-busqueda {
+  width: 100%;
+  padding: $espacio * 1.75;
+  font-size: 16px;
+  border: 1px solid $borde;
+  border-radius: $radio;
+  margin-bottom: $espacio * 2;
+}
+
+/* carrito */
+.carrito {
+  @include tarjeta;
+  margin-bottom: $espacio * 2;
+}
+
+.item-carrito {
+  @include fila($espacio * 2);
+  padding: $espacio * 2;
+  border-bottom: 1px solid $borde;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .nombre {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-size: 13px;
+      color: $gris;
+    }
+  }
+
+  .cantidad {
+    @include fila($espacio);
+
+    button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid $borde;
+      background: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  }
+
+  .subtotal {
+    width: 90px;
+    text-align: right;
+  }
+
+  .quitar {
+    background: none;
+    border: none;
+    color: $gris;
+    cursor: pointer;
+    font-size: 13px;
+  }
+}
+
+.resumen {
+  @include fila();
+  justify-content: space-between;
+  font-size: 20px;
+  padding: 0 $espacio * 2;
+  margin-bottom: $espacio * 2;
+}
+
+.acciones-carrito {
+  @include fila($espacio * 1.5);
+  justify-content: flex-end;
+}
+
+/* perfil */
+.perfil {
+  @include tarjeta;
+  max-width: 380px;
+  margin: $espacio * 4 auto;
+  padding: $espacio * 4;
+  text-align: center;
+
+  .foto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto $espacio * 2;
+    background: $naranja;
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .subir {
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 700px) {
+  .catalogo {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-categorias {
+    position: static;
+  }
+
+  .tarjeta-plato,
+  .item-carrito {
+    flex-wrap: wrap;
+  }
+}
