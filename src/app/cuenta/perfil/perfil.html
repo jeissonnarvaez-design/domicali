@@ -1,0 +1,17 @@
+<div class="perfil">
+  <div class="foto">
+    @if (url()) {
+      <img [src]="url()" alt="foto de perfil" />
+    } @else {
+      <span>{{ auth.correo().charAt(0).toUpperCase() }}</span>
+    }
+  </div>
+
+  <h2>Mi perfil</h2>
+  <p class="nota">{{ auth.correo() }}</p>
+
+  <label class="boton-borde subir">
+    {{ subiendo() ? 'Subiendo...' : 'Cambiar foto' }}
+    <input type="file" accept="image/*" (change)="subir($event)" hidden />
+  </label>
+</div>

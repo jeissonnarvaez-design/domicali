@@ -1,0 +1,24 @@
+<div class="catalogo">
+  <aside class="panel-categorias">
+    <h3>Categorias</h3>
+    <app-arbol-categorias [nodo]="raiz" [seleccionada]="seleccionada()" (elegir)="filtrar($event)" />
+  </aside>
+
+  <section>
+    <h2>Restaurantes</h2>
+
+    @if (cargando()) {
+      <p class="nota">Cargando...</p>
+    }
+
+    <div class="grilla">
+      @for (restaurante of visibles(); track restaurante.id) {
+        <app-tarjeta-restaurante [restaurante]="restaurante" [icono]="iconoDe(restaurante)" />
+      } @empty {
+        @if (!cargando()) {
+          <p class="nota">No hay restaurantes en esta categoria.</p>
+        }
+      }
+    </div>
+  </section>
+</div>

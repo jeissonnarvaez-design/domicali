@@ -4,9 +4,18 @@
   <nav class="menu">
     <!-- menu publico: lo ve cualquiera -->
     <a routerLink="/inicio" routerLinkActive="activo">Inicio</a>
+    <a routerLink="/restaurantes" routerLinkActive="activo">Restaurantes</a>
+    <a routerLink="/buscar" routerLinkActive="activo">Buscar</a>
 
     <!-- menu privado: solo con sesion iniciada -->
     @if (auth.session()) {
+      <a routerLink="/carrito" routerLinkActive="activo">
+        Carrito
+        @if (carrito.cantidad() > 0) {
+          <span class="contador">{{ carrito.cantidad() }}</span>
+        }
+      </a>
+      <a routerLink="/perfil" routerLinkActive="activo">Perfil</a>
     }
   </nav>
 

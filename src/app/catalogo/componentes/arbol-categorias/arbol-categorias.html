@@ -1,0 +1,19 @@
+<button
+  type="button"
+  class="categoria"
+  [class.activa]="nodo.valor.id === seleccionada"
+  [style.padding-left.px]="12 + nivel * 16"
+  (click)="elegir.emit(nodo)"
+>
+  <span>{{ nodo.valor.icono }}</span>
+  {{ nodo.valor.nombre }}
+</button>
+
+@for (hijo of nodo.hijos; track hijo.valor.id) {
+  <app-arbol-categorias
+    [nodo]="hijo"
+    [nivel]="nivel + 1"
+    [seleccionada]="seleccionada"
+    (elegir)="elegir.emit($event)"
+  />
+}
