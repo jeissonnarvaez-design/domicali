@@ -1,0 +1,243 @@
+@use 'variables' as *;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: $fondo;
+  color: $tinta;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+a {
+  color: $naranja;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+}
+
+/* botones */
+.boton,
+.boton-borde {
+  display: inline-block;
+  border-radius: $radio;
+  padding: $espacio $espacio * 2;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.boton {
+  background: $naranja;
+  color: white;
+  border: none;
+
+  &:hover {
+    background: $naranja-oscuro;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+.boton-borde {
+  background: white;
+  color: $tinta;
+  border: 1px solid $borde;
+}
+
+/* barra de navegacion */
+.barra {
+  @include fila($espacio * 3);
+  background: white;
+  border-bottom: 1px solid $borde;
+  padding: $espacio * 1.5 $espacio * 4;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .logo {
+    font-size: 22px;
+    font-weight: 800;
+    color: $tinta;
+    text-decoration: none;
+
+    span {
+      color: $naranja;
+    }
+  }
+
+  .menu {
+    @include fila($espacio * 2.5);
+
+    a {
+      color: $gris;
+      text-decoration: none;
+      font-size: 15px;
+
+      &.activo {
+        color: $naranja;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .cuenta {
+    @include fila($espacio * 1.5);
+    margin-left: auto;
+    font-size: 14px;
+
+    a {
+      text-decoration: none;
+    }
+
+    .boton {
+      color: white;
+    }
+
+    .correo {
+      color: $gris;
+    }
+  }
+}
+
+.contenido {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: $espacio * 4;
+  min-height: calc(100vh - 140px);
+}
+
+.pie-pagina {
+  text-align: center;
+  color: $gris;
+  font-size: 13px;
+  padding: $espacio * 3;
+}
+
+/* inicio */
+.portada {
+  background: $tinta;
+  color: white;
+  border-radius: $radio * 2;
+  padding: $espacio * 7 $espacio * 6;
+  margin-bottom: $espacio * 4;
+
+  h1 {
+    font-size: 34px;
+    max-width: 560px;
+  }
+
+  p {
+    color: #c9c9d6;
+    margin-bottom: $espacio * 3;
+  }
+}
+
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $espacio * 2;
+  margin-bottom: $espacio * 4;
+
+  .paso {
+    @include tarjeta;
+    padding: $espacio * 3;
+
+    p {
+      color: $gris;
+      font-size: 14px;
+      margin: 0;
+    }
+  }
+
+  .numero {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 50%;
+    background: $naranja;
+    color: white;
+    font-weight: 700;
+    margin-bottom: $espacio;
+  }
+}
+
+/* formularios de entrar y registro */
+.tarjeta-form {
+  @include tarjeta;
+  max-width: 380px;
+  margin: $espacio * 5 auto;
+  padding: $espacio * 4;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    font-size: 13px;
+    color: $gris;
+    margin-bottom: 4px;
+  }
+
+  input {
+    padding: $espacio * 1.25;
+    border: 1px solid $borde;
+    border-radius: $radio;
+    margin-bottom: $espacio * 2;
+    font-size: 14px;
+  }
+
+  .pie {
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 0;
+  }
+}
+
+.error {
+  color: #b00020;
+  font-size: 13px;
+}
+
+.nota {
+  color: $gris;
+  font-size: 14px;
+}
+
+.vacio-pagina {
+  text-align: center;
+  padding: $espacio * 8 0;
+
+  h1 {
+    font-size: 64px;
+    color: $naranja;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .barra {
+    flex-wrap: wrap;
+    padding: $espacio * 1.5;
+  }
+
+  .pasos {
+    grid-template-columns: 1fr;
+  }
+
+  .contenido {
+    padding: $espacio * 2;
+  }
+}
