@@ -15,7 +15,7 @@ Proyecto final de Estructuras de Datos II - Universidad Autónoma de Occidente.
 
 ## Enlaces
 
-- Propuesta gráfica (Figma): _pegar aquí el enlace_
+- Propuesta gráfica (Figma): https://www.figma.com/design/q1mknPuuI8vRMdWgiTlUWd/DomiCali---Propuesta-gr%C3%A1fica?node-id=2-2&t=MYsAombOmwiatemc-1
 - Aplicación desplegada (Netlify): https://domicali.netlify.app
 - Documento final: [docs/documento-final.md](docs/documento-final.md)
 
