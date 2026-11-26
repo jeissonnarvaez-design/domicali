@@ -1,0 +1,29 @@
+<a class="volver" routerLink="/restaurantes">← Restaurantes</a>
+
+@if (restaurante(); as r) {
+  <header class="cabecera-restaurante">
+    <div class="icono">{{ icono() }}</div>
+    <div>
+      <h1>{{ r.nombre }}</h1>
+      <p>{{ r.descripcion }}</p>
+      <span class="zona">{{ r.zona }}</span>
+    </div>
+  </header>
+
+  @if (aviso()) {
+    <p class="aviso">
+      {{ aviso() }}
+      <a routerLink="/carrito">Ver carrito ({{ carrito.cantidad() }})</a>
+    </p>
+  }
+
+  <div class="lista-platos">
+    @for (plato of platos(); track plato.id) {
+      <app-tarjeta-plato [plato]="plato" (agregar)="agregar($event)" />
+    } @empty {
+      <p class="nota">Este restaurante todavia no tiene platos.</p>
+    }
+  </div>
+} @else {
+  <p class="nota">Cargando...</p>
+}

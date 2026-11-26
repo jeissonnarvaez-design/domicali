@@ -1,0 +1,29 @@
+<h2>Buscar platos</h2>
+
+<input
+  class="campo-busqueda"
+  type="text"
+  name="texto"
+  placeholder="Escribe un plato, ej: hamburguesa, empanada, pizza..."
+  [ngModel]="texto"
+  (ngModelChange)="buscar($event)"
+/>
+
+@if (aviso()) {
+  <p class="aviso">
+    {{ aviso() }}
+    <a routerLink="/carrito">Ver carrito ({{ carrito.cantidad() }})</a>
+  </p>
+}
+
+<div class="lista-platos">
+  @for (plato of resultados(); track plato.id) {
+    <app-tarjeta-plato [plato]="plato" [lugar]="lugar(plato)" (agregar)="agregar($event)" />
+  } @empty {
+    @if (texto.trim()) {
+      <p class="nota">No hay platos que empiecen por "{{ texto }}".</p>
+    } @else {
+      <p class="nota">Los resultados salen mientras escribes.</p>
+    }
+  }
+</div>

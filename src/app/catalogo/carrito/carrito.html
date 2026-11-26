@@ -1,0 +1,42 @@
+<h2>Mi carrito</h2>
+
+@if (carrito.restaurante(); as r) {
+  <p class="nota">Pedido de <strong>{{ r.nombre }}</strong></p>
+}
+
+<div class="carrito">
+  @for (item of carrito.items(); track item.plato.id) {
+    <div class="item-carrito">
+      <div class="nombre">
+        <strong>{{ item.plato.nombre }}</strong>
+        <span>$ {{ item.plato.precio }} c/u</span>
+      </div>
+
+      <div class="cantidad">
+        <button type="button" (click)="carrito.restar(item)">-</button>
+        <span>{{ item.cantidad }}</span>
+        <button type="button" (click)="carrito.agregar(item.plato, carrito.restaurante()!)">+</button>
+      </div>
+
+      <strong class="subtotal">$ {{ item.plato.precio * item.cantidad }}</strong>
+
+      <button type="button" class="quitar" (click)="carrito.quitar(item)">Quitar</button>
+    </div>
+  } @empty {
+    <div class="vacio-pagina">
+      <p>Tu carrito esta vacio.</p>
+      <a class="boton" routerLink="/restaurantes">Ver restaurantes</a>
+    </div>
+  }
+</div>
+
+@if (carrito.items().length > 0) {
+  <div class="resumen">
+    <span>Total</span>
+    <strong>$ {{ carrito.total() }}</strong>
+  </div>
+
+  <div class="acciones-carrito">
+    <button type="button" class="boton-borde" (click)="carrito.vaciar()">Vaciar carrito</button>
+  </div>
+}
