@@ -1,0 +1,24 @@
+<h2>Mis pedidos</h2>
+
+@if (cargando()) {
+  <p class="nota">Cargando...</p>
+}
+
+<div class="lista-pedidos">
+  @for (pedido of pedidos(); track pedido.id) {
+    <a class="tarjeta-pedido" [routerLink]="['/pedidos', pedido.id]">
+      <div>
+        <strong>#{{ pedido.id }} - {{ pedido.restaurante }}</strong>
+        <span class="detalle">{{ pedido.items.length }} platos · $ {{ pedido.total }} · {{ hora(pedido.created_at) }}</span>
+      </div>
+      <span [class]="'estado ' + pedido.estado">{{ textoEstado[pedido.estado] }}</span>
+    </a>
+  } @empty {
+    @if (!cargando()) {
+      <div class="vacio-pagina">
+        <p>Todavia no has hecho pedidos.</p>
+        <a class="boton" routerLink="/restaurantes">Pedir algo</a>
+      </div>
+    }
+  }
+</div>

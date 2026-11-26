@@ -26,3 +26,8 @@
     <p>Mira la ruta en el mapa y habla con el repartidor.</p>
   </div>
 </section>
+
+<!-- los pedidos solo los pueden leer usuarios con sesion -->
+@if (auth.session()) {
+  <app-mas-pedidos />
+}

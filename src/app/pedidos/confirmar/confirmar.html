@@ -1,0 +1,57 @@
+<h2>Confirmar pedido</h2>
+
+@if (carrito.restaurante(); as r) {
+  <div class="confirmar">
+    <div>
+      <div class="caja">
+        <h3>{{ r.nombre }}</h3>
+        <ul class="resumen-items">
+          @for (item of carrito.items(); track item.plato.id) {
+            <li>
+              <span>{{ item.cantidad }} x {{ item.plato.nombre }}</span>
+              <span>$ {{ item.plato.precio * item.cantidad }}</span>
+            </li>
+          }
+        </ul>
+        <div class="total">
+          <span>Total</span>
+          <strong>$ {{ carrito.total() }}</strong>
+        </div>
+      </div>
+
+      <form class="caja datos-entrega" (ngSubmit)="confirmar()">
+        <label for="zona">Zona de entrega</label>
+        <select id="zona" name="zona" [ngModel]="zona" (ngModelChange)="elegirZona($event)">
+          <option value="" disabled>Escoge tu zona</option>
+          @for (z of zonas; track z) {
+            <option [value]="z">{{ z }}</option>
+          }
+        </select>
+
+        <label for="direccion">Direccion</label>
+        <input id="direccion" type="text" name="direccion" [(ngModel)]="direccion" placeholder="Calle, numero, apto" />
+
+        @if (msg()) {
+          <p class="error">{{ msg() }}</p>
+        }
+
+        <button type="submit" class="boton" [disabled]="enviando()">
+          {{ enviando() ? 'Enviando...' : 'Hacer pedido' }}
+        </button>
+      </form>
+    </div>
+
+    <div class="caja">
+      <h3>Ruta de entrega</h3>
+      @if (ruta().length === 0) {
+        <p class="nota">Sale desde {{ r.zona }}. Escoge tu zona para ver el recorrido.</p>
+      }
+      <app-mapa-zonas [ruta]="ruta()" />
+    </div>
+  </div>
+} @else {
+  <div class="vacio-pagina">
+    <p>No tienes nada en el carrito.</p>
+    <a class="boton" routerLink="/restaurantes">Ver restaurantes</a>
+  </div>
+}

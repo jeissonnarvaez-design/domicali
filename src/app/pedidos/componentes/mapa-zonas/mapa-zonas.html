@@ -1,0 +1,25 @@
+<svg class="mapa" viewBox="0 0 560 570">
+  @for (via of vias; track via.a + via.b) {
+    <line
+      [class.ruta]="enRuta(via)"
+      [attr.x1]="pos[via.a].x"
+      [attr.y1]="pos[via.a].y"
+      [attr.x2]="pos[via.b].x"
+      [attr.y2]="pos[via.b].y"
+    />
+  }
+
+  @for (zona of zonas; track zona) {
+    <g [attr.class]="tipo(zona)">
+      <circle [attr.cx]="pos[zona].x" [attr.cy]="pos[zona].y" r="16" />
+      <text [attr.x]="pos[zona].x" [attr.y]="pos[zona].y + 34">{{ zona }}</text>
+    </g>
+  }
+</svg>
+
+@if (ruta.length > 0) {
+  <p class="recorrido">
+    Ruta: {{ ruta.join(' → ') }}
+    <span>({{ ruta.length - 1 }} {{ ruta.length - 1 === 1 ? 'tramo' : 'tramos' }})</span>
+  </p>
+}
